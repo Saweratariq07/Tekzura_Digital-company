@@ -7,7 +7,7 @@ const faqs = [
   {
     question: "How Much Will It Cost?",
     answer:
-      "To Get A Better Idea Of The Cost Of What You Want To Build, Give Us A Quick Phone Call. We’ll Ask You A Few Questions About The Nature Of The Site, What Sort Of Interactivity The Site Will Have, Your Graphic Design Needs, Etc. Then We’ll Be Able To Give You A Ballpark Figure. If You’re Still Interested, We’ll Come To Your Place Of Business And Come Up With A Firm Quote.",
+      "To Get A Better Idea Of The Cost Of What You Want To Build, Give Us A Quick Phone Call. We&apost Ask You A Few Questions About The Nature Of The Site, What Sort Of Interactivity The Site Will Have, Your Graphic Design Needs, Etc. Then We&apost Be Able To Give You A Ballpark Figure. If You&apost Still Interested, We&apost Come To Your Place Of Business And Come Up With A Firm Quote.",
   },
   {
     question: "How Long It Takes To Design?",
@@ -17,7 +17,7 @@ const faqs = [
   {
     question: "How Do I Associate With IT Company?",
     answer:
-      "You Can Contact Us Via Our Website Or Visit Our Office. We’ll Guide You Through The Process.",
+      "You Can Contact Us Via Our Website Or Visit Our Office. We&apost Guide You Through The Process.",
   },
   {
     question: "Can You Help My Current Site Look More Professional?",
@@ -41,7 +41,6 @@ export default function FAQ() {
   return (
     <section id="faq" className="bg-[#dad7d7] py-20">
       <div className="max-w-4xl mx-auto px-4">
-        {/* Title */}
         <div className="text-center max-w-2xl mx-auto mb-14">
           <motion.h2
             className="text-4xl font-bold text-[#262a32] relative inline-block"
@@ -52,14 +51,13 @@ export default function FAQ() {
             <span className="relative">
               <span className="absolute -left-6 top-0 w-4 h-0.5 bg-[#262a32]"></span>
               <span className="absolute -left-6 top-0 h-4 w-0.5 bg-[#262a32]"></span>
-              FAQ's
+              FAQ&apos;s
               <span className="absolute -right-6 bottom-0 w-4 h-0.5 bg-[#262a32]"></span>
               <span className="absolute -right-6 bottom-0 h-4 w-0.5 bg-[#262a32]"></span>
             </span>
           </motion.h2>
         </div>
 
-        {/* FAQ Items */}
         <div className="space-y-6">
           {faqs.map((faq, idx) => {
             const isOpen = activeIndex === idx;
@@ -73,12 +71,10 @@ export default function FAQ() {
                 className="bg-white rounded-md shadow-lg overflow-hidden"
               >
                 <div className="flex items-stretch h-[56px] sm:h-[60px]">
-                  {/* Black Box with Right Side Cut */}
                   <div className="w-16 bg-black clip-right-notch flex justify-center items-center text-white">
                     {isOpen ? <FaMinus size={16} /> : <FaPlus size={16} />}
                   </div>
 
-                  {/* Question Button */}
                   <button
                     onClick={() => toggleFAQ(idx)}
                     className="flex-1 text-left bg-[#262a32] text-white uppercase font-semibold px-5 text-lg hover:opacity-90 transition-all duration-200"
@@ -87,7 +83,6 @@ export default function FAQ() {
                   </button>
                 </div>
 
-                {/* Answer */}
                 <AnimatePresence>
                   {isOpen && (
                     <motion.div
@@ -107,7 +102,6 @@ export default function FAQ() {
         </div>
       </div>
 
-      {/* Right Side Cut */}
       <style jsx>{`
         .clip-right-notch {
           clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%);
