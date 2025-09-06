@@ -42,7 +42,7 @@ const services = [
 
 export default function OurServices() {
   return (
-    <section className="py-16 bg-[#dad7d7]">
+    <section id="services" className="py-16 bg-[#dad7d7]">
       {/* Section Header */}
       <div className="text-center max-w-2xl mx-auto px-4">
         <motion.h2

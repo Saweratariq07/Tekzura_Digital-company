@@ -5,29 +5,34 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 
 const faqs = [
   {
-    question: "How Much Will It Cost?",
+    question: "What Services Does Tekzura Digital Provide?",
     answer:
-      "To Get A Better Idea Of The Cost Of What You Want To Build, Give Us A Quick Phone Call. We&apost Ask You A Few Questions About The Nature Of The Site, What Sort Of Interactivity The Site Will Have, Your Graphic Design Needs, Etc. Then We&apost Be Able To Give You A Ballpark Figure. If You&apost Still Interested, We&apost Come To Your Place Of Business And Come Up With A Firm Quote.",
+      "Tekzura Digital offers Web Development, Mobile App Development, UI/UX Design, Digital Marketing, and IT Consulting tailored to client needs.",
   },
   {
-    question: "How Long It Takes To Design?",
+    question: "How Can I Apply for a Job at Tekzura Digital?",
     answer:
-      "It Depends On The Complexity Of The Site. Basic Sites Take A Few Days. More Complex Sites May Take Weeks.",
+      "You can apply directly through our Careers Page by filling out the application form and uploading your resume.",
   },
   {
-    question: "How Do I Associate With IT Company?",
+    question: "Does Tekzura Digital Provide Remote Job Opportunities?",
     answer:
-      "You Can Contact Us Via Our Website Or Visit Our Office. We&apost Guide You Through The Process.",
+      "Yes, depending on the role, we provide both on-site and remote job opportunities to support flexible working.",
   },
   {
-    question: "Can You Help My Current Site Look More Professional?",
+    question: "Can Tekzura Digital Help Improve My Existing Website or App?",
     answer:
-      "Absolutely! We Offer Website Redesign Services To Make Your Current Site Look More Professional And User-Friendly.",
+      "Absolutely! We specialize in redesigning, optimizing, and scaling existing websites and apps to make them faster, more secure, and user-friendly.",
   },
   {
-    question: "When Do I Pay?",
+    question: "What is the Usual Project Timeline?",
     answer:
-      "Payment Terms Are Discussed During The Proposal Stage. Typically, A Deposit Is Required Upfront.",
+      "Timelines vary depending on project complexity. A basic website may take 1–2 weeks, while larger digital solutions may take several months.",
+  },
+  {
+    question: "How Does Tekzura Digital Handle Payments?",
+    answer:
+      "Payment terms are discussed during the proposal stage. Typically, a percentage is taken upfront, with milestones for the remaining payments.",
   },
 ];
 

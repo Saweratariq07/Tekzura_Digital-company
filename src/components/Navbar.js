@@ -10,12 +10,12 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const links = [
-    { name: "home", href: "#home" },
+    { name: "home", href: "/" },
     { name: "about", href: "#about" },
     { name: "services", href: "#services" },
     { name: "portfolio", href: "#portfolio" },
     { name: "team", href: "#team" },
-    { name: "career", href: "/careers" },
+    { name: "career", href: "/career" },
     { name: "contact", href: "#contact" },
     { name: "FAQ", href: "#faq" },
   ];
@@ -29,7 +29,11 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
-        isScrolled ? "bg-[#262a32] backdrop-blur-md shadow-md" : "bg-transparent"
+        open
+          ? "bg-[#262a32] backdrop-blur-md shadow-md"
+          : isScrolled
+          ? "bg-[#262a32] backdrop-blur-md shadow-md"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center px-4 h-[70px]">
@@ -53,7 +57,6 @@ export default function Navbar() {
               className="relative inline-block capitalize font-medium text-lg text-white"
             >
               {link.name}
-              {/* White underline animation */}
               <motion.span
                 className="absolute left-0 -bottom-1 h-[2px] bg-white"
                 initial={{ width: 0 }}
@@ -65,7 +68,10 @@ export default function Navbar() {
         </nav>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden text-white" onClick={() => setOpen(!open)}>
+        <button
+          className="md:hidden text-white z-50 relative"
+          onClick={() => setOpen(!open)}
+        >
           {open ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
