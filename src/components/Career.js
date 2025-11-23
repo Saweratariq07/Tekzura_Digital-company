@@ -80,7 +80,7 @@ export default function Career() {
     const hiddenRecipientInput = document.createElement("input");
     hiddenRecipientInput.type = "hidden";
     hiddenRecipientInput.name = "to_email";
-    hiddenRecipientInput.value = "yasirmalik2182@gmail.com"; // ✅ Tumhari email
+    hiddenRecipientInput.value = "contact@tekzura.com"; 
     form.current.appendChild(hiddenRecipientInput);
 
     emailjs

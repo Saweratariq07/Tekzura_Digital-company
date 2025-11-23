@@ -1,5 +1,6 @@
 import ContactForm from "@/components/ContactForm";
 import FAQ from "@/components/FAQ";
+import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import Navbar from "@/components/Navbar";
 import OurServices from "@/components/OurSecrives";
@@ -15,6 +16,7 @@ export default function Home() {
       <Team/>
       <FAQ />
      <ContactForm/>
+     <Footer/>
     </div>
   );
 }

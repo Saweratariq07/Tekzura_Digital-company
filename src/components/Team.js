@@ -10,16 +10,16 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 const teamMembers = [
-  { name: "Muhammad Aamir", role: "SEO & Web Specialist", image: "/amir bhai.png" },
-  { name: "Muhammad Yasir", role: "Virtual Assistant ", image: "/yasir.jpg" },
+ 
+  { name: "Muhammad Yasir", role: "Founder & CEO ", image: "/yasir.jpg" },
   { name: "Sawera Malik", role: " Full stack Web Developer", image: "/sawera.jpg" },
-  { name: "Fakhar Malik", role: "Python Developer", image: "/fakhar bhai.jpg" },
+  { name: "Fakhar Malik", role: "AI & Python Developer", image: "/fakhar bhai.jpg" },
 
   // Extra members for View More
-  { name: "Muhammad Sajjad", role: "Digital Marketing & SEO Expert", image: "/sajjad bhai.jpg" },
+  { name: "Muhammad Sajjad", role: "Digital Marketing & Automation Expert", image: "/sajjad bhai.jpg" },
   { name: "Muhammad Mujahid", role: "Social Media Manager", image: "/mujahid bhai.jpg" },
   { name: "Muhammad Hassan", role: "Content Creator", image: "/hassan bhai.jpg" },
-  { name: "Tahir Iqbal", role: "Project Manager", image: "/tahir bhai.png" },
+  { name: "Tahir Iqbal", role: " Customer Support Specialist", image: "/tahir bhai.png" },
 ];
 
 export default function Team() {

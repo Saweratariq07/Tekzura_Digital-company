@@ -95,7 +95,7 @@ export default function Navbar() {
               >
                 {link.name}
                 <motion.span
-                  className="absolute left-0 -bottom-1 h-[2px] bg-white"
+                  className="absolute left-0 bg-gray-800 -bottom-1 h-[2px] bg-white"
                   initial={{ width: 0 }}
                   whileHover={{ width: "100%" }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
