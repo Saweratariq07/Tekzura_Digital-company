@@ -48,10 +48,10 @@ export default function HeroSection() {
           transition={{ duration: 0.4 }}
         >
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
-            <span className="text-[#D5D9DD]">Transform Your</span>
+            <span className="text-[#D5D9DD]">Transform Your Vision</span>
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6] animate-pulse">
-              Digital Vision
+              Into Digital Reality
             </span>
           </h1>
         </motion.div>
