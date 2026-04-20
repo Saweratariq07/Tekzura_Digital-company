@@ -93,7 +93,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 w-full z-50 border-b box-border transition-[background-color,backdrop-filter,box-shadow,border-color] duration-500 ${
         open || isScrolled
-          ? "bg-gradient-to-b from-[#0f0f15]/95 to-[#1a1a24]/80 backdrop-blur-xl shadow-[0_8px_40px_rgba(198,60,142,0.15)] border-[#C63C8E]/10"
+          ? "bg-gradient-to-b from-[#0f0f15]/95 to-[#1a1a24]/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(198,60,142,0.08)] border-[#C63C8E]/6"
           : "bg-transparent border-transparent shadow-none"
       }`}
     >

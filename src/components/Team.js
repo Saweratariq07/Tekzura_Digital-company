@@ -1,117 +1,210 @@
 "use client";
 import Image from "next/image";
+import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
 import {
   FaFacebookF,
   FaTwitter,
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { LuArrowUpRight } from "react-icons/lu";
 
 const teamMembers = [
- 
-  { name: "Muhammad Yasir", role: "Founder & CEO ", image: "/yasir.jpg" },
-  { name: "Sawera Malik", role: " Full stack Web Developer", image: "/sawera.jpg" },
-  { name: "Fakhar Malik", role: "AI & Python Developer", image: "/fakhar bhai.jpg" },
-
-  // Extra members for View More
-  { name: "Muhammad Sajjad", role: "Digital Marketing & Automation Expert", image: "/sajjad bhai.jpg" },
-  { name: "Muhammad Mujahid", role: "Social Media Manager", image: "/mujahid bhai.jpg" },
-  { name: "Muhammad Hassan", role: "Content Creator", image: "/hassan bhai.jpg" },
-  { name: "Tahir Iqbal", role: " Customer Support Specialist", image: "/tahir bhai.png" },
+  {
+    name: "Muhammad Yasir",
+    role: "Founder & CEO",
+    tag: "Leadership",
+    image: "/yasir.jpg",
+  },
+  {
+    name: "Sawera Malik",
+    role: "Full Stack Web Developer",
+    tag: "Engineering",
+    image: "/sawera.jpg",
+  },
+  {
+    name: "Fakhar Malik",
+    role: "AI & Python Developer",
+    tag: "AI",
+    image: "/fakhar bhai.jpg",
+  },
+  {
+    name: "Muhammad Sajjad",
+    role: "Digital Marketing & Automation Expert",
+    tag: "Growth",
+    image: "/sajjad bhai.jpg",
+  },
+  {
+    name: "Muhammad Mujahid",
+    role: "Social Media Manager",
+    tag: "Brand",
+    image: "/mujahid bhai.jpg",
+  },
+  {
+    name: "Muhammad Hassan",
+    role: "Content Creator",
+    tag: "Creative",
+    image: "/hassan bhai.jpg",
+  },
+  {
+    name: "Tahir Iqbal",
+    role: "Customer Support Specialist",
+    tag: "Support",
+    image: "/tahir bhai.png",
+  },
 ];
 
 export default function Team() {
   const [showMore, setShowMore] = useState(false);
+  const hasMore = teamMembers.length > 6;
+
+  const visibleMembers = useMemo(() => {
+    if (showMore) {
+      return teamMembers;
+    }
+
+    return teamMembers.slice(0, 6);
+  }, [showMore]);
 
   return (
-    <section id="team" className="bg-[#262a32] py-20">
-      <div className="container mx-auto px-6">
-        <h2 className="text-center text-3xl md:text-4xl font-bold text-white mb-14">
-          Our <span className="text-sky-500">Team</span>
-        </h2>
+    <section id="team" className="relative overflow-hidden px-6 py-24">
+      {/* Ambient background */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -top-20 left-1/4 h-72 w-72 rounded-full bg-[#C63C8E]/14 blur-3xl" />
+        <div className="absolute top-1/3 right-0 h-80 w-80 rounded-full bg-[#A32EE7]/16 blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-72 w-72 rounded-full bg-[#C854D6]/10 blur-3xl" />
+      </div>
 
-        {/* First 4 Members */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-          {teamMembers.slice(0, 4).map((member, idx) => (
-            <TeamCard key={idx} member={member} idx={idx} />
-          ))}
-        </div>
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05] [background-size:44px_44px] [background-image:linear-gradient(to_right,#C63C8E_1px,transparent_1px),linear-gradient(to_bottom,#C63C8E_1px,transparent_1px)]" />
 
-        {/* Show More Row */}
-        {showMore && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-10">
-            {teamMembers.slice(4, 8).map((member, idx) => (
-              <TeamCard key={idx} member={member} idx={idx + 4} />
-            ))}
-          </div>
-        )}
+      <div className="mx-auto max-w-3xl text-center">
+        <motion.h2
+          className="inline-flex rounded-full border border-[#C63C8E]/30 bg-gradient-to-r from-[#C63C8E]/10 to-[#A32EE7]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#D5D9DD]"
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.35 }}
+        >
+          Our Team
+        </motion.h2>
 
-        {/* Button */}
-        <div className="text-center mt-10">
+        <motion.h3
+          className="mt-6 text-4xl font-bold leading-tight text-[#D5D9DD] md:text-6xl"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.45 }}
+        >
+          Minds Behind the
+          <span className="block bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6] bg-clip-text text-transparent">
+            Digital Execution
+          </span>
+        </motion.h3>
+
+        <motion.p
+          className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#A0A5A9] md:text-lg"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5 }}
+        >
+          We are strategists, developers, and creatives working together to
+          turn ideas into reliable products and measurable growth.
+        </motion.p>
+      </div>
+
+      <motion.div
+        layout
+        className="mx-auto mt-14 grid max-w-7xl grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3"
+      >
+        {visibleMembers.map((member, idx) => (
+          <TeamCard key={member.name} member={member} idx={idx} />
+        ))}
+      </motion.div>
+
+      {hasMore && (
+        <motion.div
+          className="mt-10 text-center"
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.35 }}
+        >
           <button
             onClick={() => setShowMore(!showMore)}
-            className="px-6 py-3 bg-sky-500 text-white rounded-lg font-medium hover:bg-sky-600 transition"
+            className="inline-flex items-center gap-2 rounded-lg border border-[#C63C8E]/35 bg-[#C63C8E]/10 px-5 py-3 text-sm font-semibold text-[#D5D9DD] transition-all duration-300 hover:border-[#C63C8E]/60 hover:bg-[#C63C8E]/15"
           >
-            {showMore ? "View Less" : "View More"}
+            {showMore ? "Show Less" : "View Full Team"}
+            <LuArrowUpRight className="text-base" />
           </button>
-        </div>
-      </div>
+        </motion.div>
+      )}
+
+      <div className="mx-auto mt-14 h-px w-full max-w-7xl bg-gradient-to-r from-transparent via-[#C63C8E]/40 to-transparent" />
     </section>
   );
 }
 
-// ✅ Reusable Card Component
 function TeamCard({ member, idx }) {
+  const socialLinks = [
+    { icon: FaFacebookF, label: "Facebook" },
+    { icon: FaTwitter, label: "Twitter" },
+    { icon: FaInstagram, label: "Instagram" },
+    { icon: FaLinkedinIn, label: "LinkedIn" },
+  ];
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: idx * 0.2 }}
-      viewport={{ once: true }}
-      whileHover={{ scale: 1.05, rotateX: 5, rotateY: -5 }}
-      className="
-        relative bg-white rounded-xl overflow-hidden p-8 text-center
-        shadow-xl min-h-[380px] flex flex-col justify-between
-        transition-all duration-500
-      "
+    <motion.article
+      layout
+      initial={{ opacity: 0, y: 22 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut", delay: Math.min(idx, 5) * 0.05 }}
+      whileHover={{ y: -6 }}
+      className="group relative overflow-hidden rounded-2xl border border-[#C63C8E]/20 bg-gradient-to-b from-white/[0.03] to-white/[0.01] p-7 backdrop-blur-sm transition-all duration-300 hover:border-[#C63C8E]/45 hover:shadow-[0_18px_44px_rgba(163,46,231,0.18)]"
     >
-      <motion.div
-        className="absolute top-0 right-0 w-24 h-24 bg-[#5D688A] rounded-bl-full translate-x-4 -translate-y-4"
-        animate={{ scale: [1, 1.1, 1] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      ></motion.div>
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#C63C8E] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-      <motion.div
-        className="absolute bottom-0 left-0 w-24 h-24 bg-gray-300 rounded-tr-full -translate-x-4 translate-y-4"
-        animate={{ scale: [1, 1.1, 1] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      ></motion.div>
-
-      <div className="relative w-32 h-32 mx-auto rounded-full border-4 border-white shadow-lg overflow-hidden z-10">
-        <Image
-          src={member.image}
-          alt={member.name}
-          width={128}
-          height={128}
-          className="object-cover"
-        />
+      <div className="flex items-center justify-between gap-4">
+        <span className="inline-flex rounded-full border border-[#C63C8E]/30 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-[#A0A5A9]">
+          {member.tag}
+        </span>
+        <span className="text-xs text-[#A0A5A9]">#{String(idx + 1).padStart(2, "0")}</span>
       </div>
 
-      <div className="z-10 relative mt-6">
-        <h3 className="text-xl font-bold text-gray-800">{member.name}</h3>
-        <p className="text-sky-500 text-base font-medium mt-1">{member.role}</p>
+      <div className="mt-6 flex items-center gap-4">
+        <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl border border-[#C63C8E]/30 bg-[#0f0f15]">
+          <Image
+            src={member.image}
+            alt={member.name}
+            width={80}
+            height={80}
+            className="h-full w-full object-cover"
+          />
+        </div>
+
+        <div>
+          <h4 className="text-xl font-semibold text-[#D5D9DD]">{member.name}</h4>
+          <p className="mt-1 text-sm leading-relaxed text-[#A0A5A9]">{member.role}</p>
+        </div>
       </div>
 
-      <div className="flex justify-center gap-6 mt-6 text-gray-600 z-10 relative">
-        <a href="#" className="hover:text-sky-500 transition"><FaFacebookF /></a>
-        <a href="#" className="hover:text-sky-500 transition"><FaTwitter /></a>
-        <a href="#" className="hover:text-sky-500 transition"><FaInstagram /></a>
-        <a href="#" className="hover:text-sky-500 transition"><FaLinkedinIn /></a>
-      </div>
+      <div className="mt-6 flex items-center gap-2">
+        {socialLinks.map((item) => {
+          const Icon = item.icon;
 
-      <div className="absolute left-6 right-6 bottom-[-72px] h-20 bg-gradient-to-t from-black/20 to-transparent transform scale-y-[-1] opacity-30 rounded-xl"></div>
-    </motion.div>
+          return (
+            <a
+              key={`${member.name}-${item.label}`}
+              href="#"
+              aria-label={`${member.name} ${item.label}`}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#C63C8E]/25 bg-white/[0.02] text-[#A0A5A9] transition-all duration-200 hover:border-[#C63C8E]/55 hover:text-[#D5D9DD]"
+            >
+              <Icon className="text-sm" />
+            </a>
+          );
+        })}
+      </div>
+    </motion.article>
   );
 }
