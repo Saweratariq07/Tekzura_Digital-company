@@ -3,119 +3,148 @@ import { motion } from "framer-motion";
 
 export default function ContactForm() {
   return (
-    <section className="py-20 px-6 md:px-12 bg-gradient-to-r from-blue-50 to-white">
-      <motion.h2
-        className="text-4xl font-bold text-[#262a32] text-center mx-auto mb-16"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <span className="relative block w-fit px-6 mx-auto">
-          {/* Left top corner */}
-          <span className="absolute -left-6 top-0 w-4 h-0.5 bg-[#262a32]"></span>
-          <span className="absolute -left-6 top-0 h-4 w-0.5 bg-[#262a32]"></span>
+    <section
+      id="contact"
+      className="relative overflow-hidden px-6 py-24 scroll-mt-[88px]"
+    >
+      {/* Ambient background */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -top-24 left-10 h-72 w-72 rounded-full bg-[#C63C8E]/14 blur-3xl" />
+        <div className="absolute top-1/3 right-0 h-80 w-80 rounded-full bg-[#A32EE7]/16 blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 h-72 w-72 rounded-full bg-[#C854D6]/10 blur-3xl" />
+      </div>
 
-          Contact Us        
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05] [background-size:44px_44px] [background-image:linear-gradient(to_right,#C63C8E_1px,transparent_1px),linear-gradient(to_bottom,#C63C8E_1px,transparent_1px)]" />
 
-          {/* Right bottom corner */}
-          <span className="absolute -right-6 bottom-0 w-4 h-0.5 bg-[#262a32]"></span>
-          <span className="absolute -right-6 bottom-0 h-4 w-0.5 bg-[#262a32]"></span>
-        </span>
-      </motion.h2>
+      <div className="mx-auto max-w-3xl text-center">
+        <motion.h2
+          className="inline-flex rounded-full border border-[#C63C8E]/30 bg-gradient-to-r from-[#C63C8E]/10 to-[#A32EE7]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#D5D9DD]"
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.35 }}
+        >
+          Contact Us
+        </motion.h2>
 
-      {/* Main Container */}
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-        
+        <motion.h3
+          className="mt-6 text-4xl font-bold leading-tight text-[#D5D9DD] md:text-6xl"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.45 }}
+        >
+          Start the Conversation
+          <span className="block bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6] bg-clip-text text-transparent">
+            with Tekzura
+          </span>
+        </motion.h3>
+
+        <motion.p
+          className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#A0A5A9] md:text-lg"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5 }}
+        >
+          Share your goals, timeline, and scope. Our team will get back with a
+          tailored plan to move your product forward.
+        </motion.p>
+      </div>
+
+      <div className="mx-auto mt-12 grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-2">
         {/* Google Map */}
         <motion.div
-          initial={{ opacity: 0, x: -80 }}
+          initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="rounded-3xl shadow-2xl overflow-hidden border-4 border-white h-full"
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6 }}
+          className="flex h-full flex-col overflow-hidden rounded-2xl border border-[#C63C8E]/25 bg-white/[0.02] shadow-[0_18px_40px_rgba(15,15,21,0.45)]"
         >
+          <div className="flex items-center justify-between border-b border-[#C63C8E]/20 px-5 py-3">
+            <p className="text-sm font-semibold text-[#D5D9DD]">Our Location</p>
+            <span className="text-xs uppercase tracking-widest text-[#A0A5A9]">
+              Bahawalpur, PK
+            </span>
+          </div>
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.7614858440217!2d75.85772537506149!3d22.73634527937305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fd1e3b74ab05%3A0x2df46f7efc21c0!2sIndia!5e0!3m2!1sen!2s!4v1693829812345!5m2!1sen!2s"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d111256.73033521952!2d71.69001209999999!3d29.376940299999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x393b90c46c611ad5%3A0xfcdf0da8e103f862!2sBahawalpur%2C%20Pakistan!5e0!3m2!1sen!2s!4v1777610547729!5m2!1sen!2s"
             width="100%"
-            height="420"
+            className="w-full flex-1 min-h-[360px]"
             style={{ border: 0 }}
-            allowFullScreen=""
+            allowFullScreen
             loading="lazy"
+            title="Tekzura Location"
           ></iframe>
         </motion.div>
 
         {/* Contact Form */}
         <motion.form
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="bg-white rounded-3xl shadow-2xl p-10 space-y-8 h-full flex flex-col justify-center"
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6 }}
+          className="rounded-2xl border border-[#C63C8E]/25 bg-white/[0.02] p-8 backdrop-blur-sm"
         >
-          <h2 className="text-3xl font-bold text-center text-blue-700 mb-6">
-            Get in Touch
-          </h2>
+          <h4 className="text-2xl font-semibold text-[#D5D9DD]">Get in Touch</h4>
+          <p className="mt-2 text-sm text-[#A0A5A9]">
+            We reply within 24 hours with next steps.
+          </p>
 
-          {/* Name Input */}
-          <div className="relative">
-            <motion.input
-              type="text"
-              required
-              className="peer w-full px-4 pt-5 pb-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500 transition"
-              placeholder=" "
-            />
-            <label className="absolute left-4 top-2 text-gray-500 text-sm peer-placeholder-shown:top-5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base transition-all">
+          <div className="mt-6 space-y-5">
+            <label className="block text-sm font-medium text-[#D5D9DD]">
               Name
+              <input
+                type="text"
+                required
+                className="mt-2 w-full rounded-xl border border-[#C63C8E]/20 bg-[#0f0f15]/80 px-4 py-3 text-sm text-[#D5D9DD] outline-none transition focus:border-[#C63C8E]/60 focus:ring-2 focus:ring-[#C63C8E]/20"
+                placeholder="Your full name"
+              />
             </label>
-          </div>
 
-          {/* Contact Number */}
-          <div className="relative">
-            <motion.input
-              type="text"
-              required
-              className="peer w-full px-4 pt-5 pb-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500 transition"
-              placeholder=" "
-            />
-            <label className="absolute left-4 top-2 text-gray-500 text-sm peer-placeholder-shown:top-5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base transition-all">
+            <label className="block text-sm font-medium text-[#D5D9DD]">
               Contact Number
+              <input
+                type="text"
+                required
+                className="mt-2 w-full rounded-xl border border-[#C63C8E]/20 bg-[#0f0f15]/80 px-4 py-3 text-sm text-[#D5D9DD] outline-none transition focus:border-[#C63C8E]/60 focus:ring-2 focus:ring-[#C63C8E]/20"
+                placeholder="Phone number"
+              />
             </label>
-          </div>
 
-          {/* Email */}
-          <div className="relative">
-            <motion.input
-              type="email"
-              required
-              className="peer w-full px-4 pt-5 pb-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500 transition"
-              placeholder=" "
-            />
-            <label className="absolute left-4 top-2 text-gray-500 text-sm peer-placeholder-shown:top-5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base transition-all">
+            <label className="block text-sm font-medium text-[#D5D9DD]">
               Email
+              <input
+                type="email"
+                required
+                className="mt-2 w-full rounded-xl border border-[#C63C8E]/20 bg-[#0f0f15]/80 px-4 py-3 text-sm text-[#D5D9DD] outline-none transition focus:border-[#C63C8E]/60 focus:ring-2 focus:ring-[#C63C8E]/20"
+                placeholder="you@example.com"
+              />
             </label>
-          </div>
 
-          {/* Message */}
-          <div className="relative">
-            <motion.textarea
-              rows="4"
-              required
-              className="peer w-full px-4 pt-5 pb-2 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500 transition"
-              placeholder=" "
-            ></motion.textarea>
-            <label className="absolute left-4 top-2 text-gray-500 text-sm peer-placeholder-shown:top-5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base transition-all">
+            <label className="block text-sm font-medium text-[#D5D9DD]">
               Your Message
+              <textarea
+                rows={4}
+                required
+                className="mt-2 w-full rounded-xl border border-[#C63C8E]/20 bg-[#0f0f15]/80 px-4 py-3 text-sm text-[#D5D9DD] outline-none transition focus:border-[#C63C8E]/60 focus:ring-2 focus:ring-[#C63C8E]/20"
+                placeholder="Tell us about your project"
+              ></textarea>
             </label>
           </div>
 
-          {/* Submit Button */}
           <motion.button
-            whileHover={{ scale: 1.07 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-full py-3 rounded-full text-lg font-semibold text-white shadow-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-600 hover:to-blue-600 transition"
+            type="submit"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="mt-6 w-full rounded-xl bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6] py-3 text-sm font-semibold text-white transition hover:shadow-[0_14px_28px_rgba(198,60,142,0.35)]"
           >
-            Send Message 🚀
+            Send Message
           </motion.button>
         </motion.form>
       </div>
+
+      <div className="mx-auto mt-14 h-px w-full max-w-7xl bg-gradient-to-r from-transparent via-[#C63C8E]/40 to-transparent" />
     </section>
   );
 }

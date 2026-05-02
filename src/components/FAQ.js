@@ -44,74 +44,118 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="bg-[#dad7d7] py-20">
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <motion.h2
-            className="text-4xl font-bold text-[#262a32] relative inline-block"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="relative">
-              <span className="absolute -left-6 top-0 w-4 h-0.5 bg-[#262a32]"></span>
-              <span className="absolute -left-6 top-0 h-4 w-0.5 bg-[#262a32]"></span>
-              FAQ&apos;s
-              <span className="absolute -right-6 bottom-0 w-4 h-0.5 bg-[#262a32]"></span>
-              <span className="absolute -right-6 bottom-0 h-4 w-0.5 bg-[#262a32]"></span>
-            </span>
-          </motion.h2>
-        </div>
-
-        <div className="space-y-6">
-          {faqs.map((faq, idx) => {
-            const isOpen = activeIndex === idx;
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-md shadow-lg overflow-hidden"
-              >
-                <div className="flex items-stretch h-[56px] sm:h-[60px]">
-                  <div className="w-16 bg-black clip-right-notch flex justify-center items-center text-white">
-                    {isOpen ? <FaMinus size={16} /> : <FaPlus size={16} />}
-                  </div>
-
-                  <button
-                    onClick={() => toggleFAQ(idx)}
-                    className="flex-1 text-left bg-[#262a32] text-white uppercase font-semibold px-5 text-lg hover:opacity-90 transition-all duration-200"
-                  >
-                    {faq.question}
-                  </button>
-                </div>
-
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4 }}
-                      className="px-6 py-5 border-t border-gray-200 text-gray-700 text-base leading-relaxed bg-white"
-                    >
-                      {faq.answer}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
-        </div>
+    <section
+      id="faq"
+      className="relative overflow-hidden px-6 py-24 scroll-mt-[88px]"
+    >
+      {/* Ambient background */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -top-24 right-10 h-72 w-72 rounded-full bg-[#C63C8E]/14 blur-3xl" />
+        <div className="absolute top-1/3 left-0 h-80 w-80 rounded-full bg-[#A32EE7]/16 blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 h-72 w-72 rounded-full bg-[#C854D6]/10 blur-3xl" />
       </div>
 
-      <style jsx>{`
-        .clip-right-notch {
-          clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%);
-        }
-      `}</style>
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05] [background-size:44px_44px] [background-image:linear-gradient(to_right,#C63C8E_1px,transparent_1px),linear-gradient(to_bottom,#C63C8E_1px,transparent_1px)]" />
+
+      <div className="mx-auto max-w-3xl text-center">
+        <motion.h2
+          className="inline-flex rounded-full border border-[#C63C8E]/30 bg-gradient-to-r from-[#C63C8E]/10 to-[#A32EE7]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#D5D9DD]"
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.35 }}
+        >
+          FAQs
+        </motion.h2>
+
+        <motion.h3
+          className="mt-6 text-4xl font-bold leading-tight text-[#D5D9DD] md:text-6xl"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.45 }}
+        >
+          Clear Answers for
+          <span className="block bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6] bg-clip-text text-transparent">
+            Confident Decisions
+          </span>
+        </motion.h3>
+
+        <motion.p
+          className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#A0A5A9] md:text-lg"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5 }}
+        >
+          Everything you need to know about our services, timelines, and
+          collaboration process.
+        </motion.p>
+      </div>
+
+      <div className="mx-auto mt-12 max-w-4xl space-y-4">
+        {faqs.map((faq, idx) => {
+          const isOpen = activeIndex === idx;
+
+          return (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: idx * 0.05 }}
+              viewport={{ once: true, amount: 0.3 }}
+              className={`rounded-2xl border bg-white/[0.02] backdrop-blur-sm transition-all duration-300 ${
+                isOpen
+                  ? "border-[#C63C8E]/50 shadow-[0_16px_32px_rgba(163,46,231,0.18)]"
+                  : "border-[#C63C8E]/20 hover:border-[#C63C8E]/40"
+              }`}
+            >
+              <button
+                type="button"
+                onClick={() => toggleFAQ(idx)}
+                aria-expanded={isOpen}
+                aria-controls={`faq-panel-${idx}`}
+                className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+              >
+                <div>
+                  <p className="text-sm uppercase tracking-[0.2em] text-[#A0A5A9]">
+                    Question {String(idx + 1).padStart(2, "0")}
+                  </p>
+                  <h4 className="mt-2 text-lg font-semibold text-[#D5D9DD] md:text-xl">
+                    {faq.question}
+                  </h4>
+                </div>
+                <span
+                  className={`inline-flex h-10 w-10 items-center justify-center rounded-full border text-sm transition-all duration-200 ${
+                    isOpen
+                      ? "border-[#C63C8E]/60 bg-[#C63C8E]/15 text-[#C854D6]"
+                      : "border-[#C63C8E]/25 bg-white/[0.02] text-[#A0A5A9]"
+                  }`}
+                >
+                  {isOpen ? <FaMinus /> : <FaPlus />}
+                </span>
+              </button>
+
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    id={`faq-panel-${idx}`}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    className="px-6 pb-5 text-sm leading-relaxed text-[#A0A5A9] md:text-base"
+                  >
+                    {faq.answer}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      <div className="mx-auto mt-14 h-px w-full max-w-7xl bg-gradient-to-r from-transparent via-[#C63C8E]/40 to-transparent" />
     </section>
   );
 }

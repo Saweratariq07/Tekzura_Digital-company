@@ -1,14 +1,39 @@
 "use client";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
+const roles = [
+  "Web Designer",
+  "Web Developer",
+  "Mobile App Designer",
+  "Mobile App Developer",
+  "Digital Marketer",
+];
+
+const hiringSteps = [
+  {
+    title: "Apply",
+    desc: "Share your resume, role, and experience so we can review your fit.",
+  },
+  {
+    title: "Screen",
+    desc: "We schedule a short call to understand your goals and availability.",
+  },
+  {
+    title: "Interview",
+    desc: "Meet the team and discuss how you can contribute to ongoing projects.",
+  },
+];
 
 export default function Career() {
   const form = useRef();
   const [resumeUrl, setResumeUrl] = useState("");
   const [popup, setPopup] = useState({ show: false, type: "", message: "" });
   const [loading, setLoading] = useState(false);
+  const isSuccess = popup.type === "success";
 
   // Upload file to Cloudinary
   const handleFileUpload = async (e) => {
@@ -113,168 +138,253 @@ export default function Career() {
   };
 
   return (
-    <section>
-     <Navbar/>
-      <div
-        className="relative bg-cover bg-center h-94 flex items-center justify-center"
-        style={{ backgroundImage: "url('/career.jpg')" }}
-      >
-        <div className="absolute  inset-0 bg-[#262a32]/70"></div>
-        <h1 className="relative  text-white text-3xl md:text-4xl font-bold">
-          Home / Careers
-        </h1>
-      </div>
+    <>
+    <section className="relative overflow-hidden">
+      <Navbar />
 
-      {/* Form Section */}
-      <div className="py-16 px-6 md:px-20 bg-[#d1d5dc]">
-        <div className="text-center mb-12">
-       <div className="text-center max-w-2xl mx-auto mb-14">
-  <motion.h2
-    className="text-4xl font-bold text-[#262a32] relative inline-block"
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-  >
-    <span className="relative px-6">
-      {/* Left top corner */}
-      <span className="absolute -left-6 top-0 w-4 h-0.5 bg-[#262a32]"></span>
-      <span className="absolute -left-6 top-0 h-4 w-0.5 bg-[#262a32]"></span>
-
-      Career
-
-      {/* Right bottom corner */}
-      <span className="absolute -right-6 bottom-0 w-4 h-0.5 bg-[#262a32]"></span>
-      <span className="absolute -right-6 bottom-0 h-4 w-0.5 bg-[#262a32]"></span>
-    </span>
-  </motion.h2>
-</div>
-
-          <p className="text-[#262a32]/80 mt-2">
-            Job Opening In IT Company. Apply Now!
-          </p>
+      {/* Hero */}
+      <div className="relative overflow-hidden px-6 pt-28 pb-12">
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute -top-24 left-10 h-72 w-72 rounded-full bg-[#C63C8E]/14 blur-3xl" />
+          <div className="absolute top-1/3 right-0 h-80 w-80 rounded-full bg-[#A32EE7]/16 blur-3xl" />
+          <div className="absolute bottom-0 left-1/4 h-72 w-72 rounded-full bg-[#C854D6]/10 blur-3xl" />
         </div>
 
-        {/* Form */}
-        <form
-          ref={form}
-          onSubmit={sendEmail}
-          className="max-w-3xl mx-auto bg-[#262a32] p-10 rounded-2xl shadow-xl space-y-6 text-white"
-        >
-          {/* Name */}
-          <input
-            type="text"
-            name="user_name"
-            placeholder="Full Name"
-            required
-            className="w-full border border-gray-400 rounded-lg px-4 py-3 bg-transparent text-white placeholder-gray-300"
-          />
+        <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05] [background-size:44px_44px] [background-image:linear-gradient(to_right,#C63C8E_1px,transparent_1px),linear-gradient(to_bottom,#C63C8E_1px,transparent_1px)]" />
 
-          {/* Contact */}
-          <input
-            type="text"
-            name="user_contact"
-            placeholder="Contact Number"
-            required
-            className="w-full border border-gray-400 rounded-lg px-4 py-3 bg-transparent text-white placeholder-gray-300"
-          />
+        <div className="mx-auto max-w-3xl text-center">
+          <motion.h2
+            className="inline-flex rounded-full border border-[#C63C8E]/30 bg-gradient-to-r from-[#C63C8E]/10 to-[#A32EE7]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#D5D9DD]"
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.35 }}
+          >
+            Careers
+          </motion.h2>
 
-          {/* Email */}
-          <input
-            type="email"
-            name="user_email"
-            placeholder="Email Address"
-            required
-            className="w-full border border-gray-400 rounded-lg px-4 py-3 bg-transparent text-white placeholder-gray-300"
-          />
+          <motion.h1
+            className="mt-6 text-4xl font-bold leading-tight text-[#D5D9DD] md:text-6xl"
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.45 }}
+          >
+            Build Your Career
+            <span className="block bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6] bg-clip-text text-transparent">
+              with Tekzura Digital
+            </span>
+          </motion.h1>
 
-          {/* Apply For */}
-          <div>
-            <p className="font-medium mb-2">Apply For Which Post?</p>
-            <div className="flex flex-wrap gap-6">
-              {[
-                "Web Designer",
-                "Web Developer",
-                "Mobile App Designer",
-                "Mobile App Developer",
-                "Digital Marketer",
-              ].map((role, i) => (
-                <label
-                  key={i}
-                  className="flex items-center gap-2 cursor-pointer"
+          <motion.p
+            className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#A0A5A9] md:text-lg"
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5 }}
+          >
+            Join a team that ships modern products, supports growth, and builds
+            long-term partnerships with global clients.
+          </motion.p>
+        </div>
+      </div>
+
+      {/* Application Section */}
+      <div className="relative px-6 pb-24">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 lg:grid-cols-[1.05fr_1.2fr]">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.45 }}
+            className="rounded-2xl border border-[#C63C8E]/20 bg-white/[0.02] p-8 backdrop-blur-sm"
+          >
+            <h3 className="text-2xl font-semibold text-[#D5D9DD]">Open Roles</h3>
+            <p className="mt-2 text-sm text-[#A0A5A9]">
+              Choose the track that fits your skills. We review applications
+              weekly.
+            </p>
+
+            <div className="mt-5 grid gap-3">
+              {roles.map((role) => (
+                <div
+                  key={role}
+                  className="flex items-center justify-between rounded-xl border border-[#C63C8E]/20 bg-[#0f0f15]/60 px-4 py-3 text-sm text-[#D5D9DD]"
                 >
-                  <input
-                    type="radio"
-                    name="user_post"
-                    value={role}
-                    required
-                    className="text-[#d1d5dc] focus:ring-[#d1d5dc]"
-                  />
-                  {role}
-                </label>
+                  <span>{role}</span>
+                  <span className="text-xs uppercase tracking-widest text-[#A0A5A9]">
+                    Hiring
+                  </span>
+                </div>
               ))}
             </div>
-          </div>
 
-          {/* Experience */}
-          <input
-            type="text"
-            name="user_experience"
-            placeholder="Years Of Experience"
-            className="w-full border border-gray-400 rounded-lg px-4 py-3 bg-transparent text-white placeholder-gray-300"
-          />
-
-          {/* Other Details */}
-          <textarea
-            name="user_details"
-            placeholder="Other Details"
-            rows={4}
-            className="w-full border border-gray-400 rounded-lg px-4 py-3 bg-transparent text-white placeholder-gray-300"
-          ></textarea>
-
-          {/* Resume Upload */}
-          <div>
-            <p className="font-medium mb-2">Upload Your Resume (PDF Only)</p>
-            <input
-              type="file"
-              accept=".pdf"
-              onChange={handleFileUpload}
-              className="w-full border border-gray-400 rounded-lg px-4 py-2 bg-transparent text-white file:bg-[#d1d5dc] file:text-[#262a32] file:font-semibold cursor-pointer"
-            />
-            {loading && (
-              <p className="text-yellow-400 text-sm mt-2">⏳ Uploading...</p>
-            )}
-            {resumeUrl && (
-              <div className="text-green-400 text-sm mt-2">
-                ✅ Resume uploaded successfully!
-               
+            <div className="mt-8 border-t border-[#C63C8E]/15 pt-6">
+              <h4 className="text-lg font-semibold text-[#D5D9DD]">
+                Hiring Process
+              </h4>
+              <div className="mt-4 grid gap-4">
+                {hiringSteps.map((step, index) => (
+                  <div
+                    key={step.title}
+                    className="rounded-xl border border-[#C63C8E]/15 bg-white/[0.02] p-4"
+                  >
+                    <p className="text-xs uppercase tracking-widest text-[#A0A5A9]">
+                      Step {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <h5 className="mt-2 text-base font-semibold text-[#D5D9DD]">
+                      {step.title}
+                    </h5>
+                    <p className="mt-1 text-sm text-[#A0A5A9]">{step.desc}</p>
+                  </div>
+                ))}
               </div>
-            )}
-          </div>
+            </div>
 
-          {/* Submit */}
-          <button
-            type="submit"
-            className="w-full bg-[#d1d5dc] text-[#262a32] px-6 py-3 rounded-lg font-semibold transition duration-200 hover:bg-gray-300"
+            <div className="mt-8 rounded-xl border border-[#C63C8E]/20 bg-gradient-to-r from-[#C63C8E]/10 to-[#A32EE7]/10 p-5">
+              <p className="text-sm text-[#D5D9DD]">
+                Not seeing your role? Send your resume and we will keep it on
+                file for upcoming openings.
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.form
+            ref={form}
+            onSubmit={sendEmail}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.45 }}
+            className="rounded-2xl border border-[#C63C8E]/25 bg-white/[0.02] p-8 backdrop-blur-sm"
           >
-            Submit Application
-          </button>
-        </form>
+            <h3 className="text-2xl font-semibold text-[#D5D9DD]">Apply Now</h3>
+            <p className="mt-2 text-sm text-[#A0A5A9]">
+              Complete the form below and upload your resume (PDF only).
+            </p>
+
+            <div className="mt-6 space-y-5">
+              <label className="block text-sm font-medium text-[#D5D9DD]">
+                Full Name
+                <input
+                  type="text"
+                  name="user_name"
+                  placeholder="Full Name"
+                  required
+                  className="mt-2 w-full rounded-xl border border-[#C63C8E]/20 bg-[#0f0f15]/80 px-4 py-3 text-sm text-[#D5D9DD] outline-none transition focus:border-[#C63C8E]/60 focus:ring-2 focus:ring-[#C63C8E]/20"
+                />
+              </label>
+
+              <label className="block text-sm font-medium text-[#D5D9DD]">
+                Contact Number
+                <input
+                  type="text"
+                  name="user_contact"
+                  placeholder="Contact Number"
+                  required
+                  className="mt-2 w-full rounded-xl border border-[#C63C8E]/20 bg-[#0f0f15]/80 px-4 py-3 text-sm text-[#D5D9DD] outline-none transition focus:border-[#C63C8E]/60 focus:ring-2 focus:ring-[#C63C8E]/20"
+                />
+              </label>
+
+              <label className="block text-sm font-medium text-[#D5D9DD]">
+                Email Address
+                <input
+                  type="email"
+                  name="user_email"
+                  placeholder="Email Address"
+                  required
+                  className="mt-2 w-full rounded-xl border border-[#C63C8E]/20 bg-[#0f0f15]/80 px-4 py-3 text-sm text-[#D5D9DD] outline-none transition focus:border-[#C63C8E]/60 focus:ring-2 focus:ring-[#C63C8E]/20"
+                />
+              </label>
+
+              <div>
+                <p className="text-sm font-medium text-[#D5D9DD]">
+                  Apply For Which Post?
+                </p>
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {roles.map((role) => (
+                    <label
+                      key={role}
+                      className="flex items-center gap-3 rounded-lg border border-[#C63C8E]/20 bg-[#0f0f15]/60 px-3 py-2 text-sm text-[#D5D9DD]"
+                    >
+                      <input
+                        type="radio"
+                        name="user_post"
+                        value={role}
+                        required
+                        className="accent-[#C63C8E]"
+                      />
+                      {role}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <label className="block text-sm font-medium text-[#D5D9DD]">
+                Years Of Experience
+                <input
+                  type="text"
+                  name="user_experience"
+                  placeholder="Years Of Experience"
+                  className="mt-2 w-full rounded-xl border border-[#C63C8E]/20 bg-[#0f0f15]/80 px-4 py-3 text-sm text-[#D5D9DD] outline-none transition focus:border-[#C63C8E]/60 focus:ring-2 focus:ring-[#C63C8E]/20"
+                />
+              </label>
+
+              <label className="block text-sm font-medium text-[#D5D9DD]">
+                Other Details
+                <textarea
+                  name="user_details"
+                  placeholder="Other Details"
+                  rows={4}
+                  className="mt-2 w-full rounded-xl border border-[#C63C8E]/20 bg-[#0f0f15]/80 px-4 py-3 text-sm text-[#D5D9DD] outline-none transition focus:border-[#C63C8E]/60 focus:ring-2 focus:ring-[#C63C8E]/20"
+                ></textarea>
+              </label>
+
+              <label className="block text-sm font-medium text-[#D5D9DD]">
+                Upload Your Resume (PDF only)
+                <input
+                  type="file"
+                  accept=".pdf"
+                  onChange={handleFileUpload}
+                  className="mt-2 w-full rounded-xl border border-[#C63C8E]/20 bg-[#0f0f15]/80 px-4 py-2 text-sm text-[#D5D9DD] file:mr-4 file:rounded-lg file:border-0 file:bg-[#C63C8E]/20 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-[#D5D9DD]"
+                />
+                {loading && (
+                  <p className="mt-2 text-xs text-[#f59e0b]">
+                    Uploading resume...
+                  </p>
+                )}
+                {resumeUrl && (
+                  <p className="mt-2 text-xs text-[#10b981]">
+                    Resume uploaded successfully.
+                  </p>
+                )}
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              className="mt-6 w-full rounded-xl bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6] px-6 py-3 text-sm font-semibold text-white transition hover:shadow-[0_14px_28px_rgba(198,60,142,0.35)]"
+            >
+              Submit Application
+            </button>
+          </motion.form>
+        </div>
       </div>
 
       {/* Popup */}
       {popup.show && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
           <div
-            className={`p-6 rounded-xl shadow-xl text-center w-80 ${
-              popup.type === "success"
-                ? "bg-green-100 text-green-800"
-                : "bg-red-100 text-red-800"
+            className={`w-full max-w-sm rounded-2xl border px-6 py-6 text-center shadow-2xl ${
+              isSuccess
+                ? "border-[#10b981]/40 bg-[#0f1512] text-[#10b981]"
+                : "border-[#ef4444]/40 bg-[#1a0f12] text-[#ef4444]"
             }`}
           >
-            <p className="text-lg font-semibold">{popup.message}</p>
+            <p className="text-base font-semibold">{popup.message}</p>
             <button
               onClick={() => setPopup({ show: false, type: "", message: "" })}
-              className="mt-4 bg-[#262a32] text-white px-4 py-2 rounded-lg"
+              className="mt-4 rounded-lg border border-[#C63C8E]/40 bg-[#0f0f15] px-4 py-2 text-sm text-[#D5D9DD]"
             >
               Close
             </button>
@@ -282,5 +392,7 @@ export default function Career() {
         </div>
       )}
     </section>
+    <Footer />
+    </>
   );
 }

@@ -11,6 +11,7 @@ import {
   FaAward,
   FaShieldAlt,
   FaRocket,
+  FaChartLine,
 } from "react-icons/fa";
 import { LuArrowUpRight } from "react-icons/lu";
 
@@ -42,7 +43,7 @@ const services = [
   {
     title: "Digital Marketing",
     desc: "Performance campaigns, content strategy, and funnel optimization to drive measurable growth.",
-    icon: FaBullhorn,
+    icon: FaChartLine,
     tag: "Growth",
   },
   {
@@ -100,7 +101,10 @@ const itemVariants = {
 
 export default function OurServices() {
   return (
-    <section id="services" className="relative overflow-hidden py-24 px-6">
+    <section
+      id="services"
+      className="relative overflow-hidden py-24 px-6 scroll-mt-[88px]"
+    >
       {/* Ambient background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -top-20 left-0 h-72 w-72 rounded-full bg-[#C63C8E]/15 blur-3xl" />

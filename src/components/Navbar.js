@@ -5,20 +5,22 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+const MOBILE_NAV_ID = "primary-mobile-nav";
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeLink, setActiveLink] = useState("home");
 
   const links = [
-    { name: "home", href: "/" },
-    { name: "about", href: "#about" },
-    { name: "services", href: "#services" },
-    { name: "portfolio", href: "#portfolio" },
-    { name: "team", href: "#team" },
-    { name: "career", href: "/career" },
-    { name: "contact", href: "#contact" },
-    { name: "FAQ", href: "#faq" },
+    { name: "home", href: "/", label: "Home" },
+    { name: "about", href: "#about", label: "About" },
+    { name: "services", href: "#services", label: "Services" },
+    { name: "portfolio", href: "#portfolio", label: "Portfolio" },
+    { name: "team", href: "#team", label: "Team" },
+    { name: "career", href: "/career", label: "Career" },
+    { name: "contact", href: "#contact", label: "Contact" },
+    { name: "faq", href: "#faq", label: "FAQ" },
   ];
 
   useEffect(() => {
@@ -26,6 +28,15 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
 
   // Desktop Link Component
   const DesktopLink = ({ link, index }) => {
@@ -39,14 +50,14 @@ export default function Navbar() {
       >
         <Link
           href={link.href}
-          className={`relative inline-block capitalize font-semibold text-sm tracking-wide px-3 py-2 transition-all duration-300 ${
+          className={`relative inline-block font-semibold text-sm tracking-wide px-3 py-2 rounded-md transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C854D6] ${
             isActive
               ? "text-transparent bg-clip-text bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6]"
               : "text-[#D5D9DD] hover:text-[#f5f5f7]"
           }`}
           onClick={() => setActiveLink(link.name)}
         >
-          {link.name}
+          {link.label}
 
           {/* Animated underline */}
           <motion.span
@@ -81,10 +92,10 @@ export default function Navbar() {
           setOpen(false);
           setActiveLink(link.name);
         }}
-        className="relative capitalize font-semibold text-base tracking-wide text-[#D5D9DD] hover:text-[#f5f5f7] transition-colors duration-300 py-3 px-4 block rounded-lg hover:bg-gradient-to-r hover:from-[#C63C8E]/10 hover:to-[#A32EE7]/10 group"
+        className="relative capitalize font-semibold text-base tracking-wide text-[#D5D9DD] hover:text-[#f5f5f7] transition-colors duration-300 py-3 px-4 block rounded-lg hover:bg-gradient-to-r hover:from-[#C63C8E]/10 hover:to-[#A32EE7]/10 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C854D6]"
       >
         <motion.span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-gradient-to-b from-[#C63C8E] to-[#A32EE7] rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        {link.name}
+        {link.label}
       </Link>
     </motion.div>
   );
@@ -107,7 +118,10 @@ export default function Navbar() {
 
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 h-[80px]">
         {/* Logo */}
-        <Link href="/" className="flex items-center h-full group">
+        <Link
+          href="/"
+          className="flex items-center h-full group rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C63C8E]"
+        >
           <motion.div
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
@@ -135,21 +149,30 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Desktop CTA Button */}
-        <motion.button
-          className="hidden md:flex gap-2 ml-6 px-6 py-2.5 bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6] text-white font-semibold text-sm tracking-wide rounded-lg transition-all duration-300 hover:shadow-[0_8px_24px_rgba(198,60,142,0.4)] hover:scale-105 active:scale-95"
+        {/* Desktop CTA */}
+        <motion.div
+          className="hidden md:block ml-6"
           whileHover={{ y: -2 }}
           whileTap={{ scale: 0.95 }}
         >
-          Get Started
-        </motion.button>
+          <Link
+            href="#contact"
+            className="inline-flex gap-2 px-6 py-2.5 bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6] text-white font-semibold text-sm tracking-wide rounded-lg transition-all duration-300 hover:shadow-[0_8px_24px_rgba(198,60,142,0.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            Get started
+          </Link>
+        </motion.div>
 
         {/* Mobile Toggle */}
         <motion.button
-          className="md:hidden text-[#D5D9DD] z-50 relative p-2 rounded-lg hover:bg-[#C63C8E]/10 transition-colors duration-300"
+          type="button"
+          className="md:hidden text-[#D5D9DD] z-50 relative p-2 rounded-lg hover:bg-[#C63C8E]/10 transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C63C8E]"
           onClick={() => setOpen(!open)}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
+          aria-expanded={open}
+          aria-controls={MOBILE_NAV_ID}
+          aria-label={open ? "Close menu" : "Open menu"}
         >
           <motion.div
             animate={{ rotate: open ? 90 : 0 }}
@@ -175,10 +198,15 @@ export default function Navbar() {
               exit={{ opacity: 0 }}
               onClick={() => setOpen(false)}
               className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 md:hidden"
+              aria-hidden
             />
 
             {/* Mobile Menu Panel */}
             <motion.nav
+              id={MOBILE_NAV_ID}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Site navigation"
               initial={{ x: "100%", opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: "100%", opacity: 0 }}
@@ -209,9 +237,13 @@ export default function Navbar() {
                 transition={{ delay: links.length * 0.05 + 0.1 }}
                 className="mt-8 pt-6 border-t border-[#C63C8E]/10"
               >
-                <button className="w-full py-3 bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6] text-white font-semibold text-sm tracking-wide rounded-lg hover:shadow-[0_8px_24px_rgba(198,60,142,0.4)] transition-all duration-300 active:scale-95">
-                  Get Started
-                </button>
+                <Link
+                  href="#contact"
+                  onClick={() => setOpen(false)}
+                  className="flex w-full justify-center py-3 bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6] text-white font-semibold text-sm tracking-wide rounded-lg hover:shadow-[0_8px_24px_rgba(198,60,142,0.4)] transition-all duration-300 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  Get started
+                </Link>
               </motion.div>
             </motion.nav>
           </>

@@ -68,7 +68,10 @@ export default function Team() {
   }, [showMore]);
 
   return (
-    <section id="team" className="relative overflow-hidden px-6 py-24">
+    <section
+      id="team"
+      className="relative overflow-hidden px-6 py-24 scroll-mt-[88px]"
+    >
       {/* Ambient background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -top-20 left-1/4 h-72 w-72 rounded-full bg-[#C63C8E]/14 blur-3xl" />

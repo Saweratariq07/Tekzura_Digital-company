@@ -1,10 +1,17 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 export default function HeroSection() {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <section className="relative min-h-screen pt-32 pb-20 px-6 overflow-hidden">
+    <section
+      id="about"
+      className="relative min-h-screen pt-32 pb-20 px-6 overflow-hidden scroll-mt-[88px]"
+      aria-labelledby="hero-heading"
+    >
       {/* Animated gradient background */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#C63C8E]/20 to-transparent rounded-full blur-3xl"></div>
@@ -47,10 +54,13 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+          <h1
+            id="hero-heading"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
+          >
             <span className="text-[#D5D9DD]">Transform Your Vision</span>
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6] animate-pulse">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6]">
               Into Digital Reality
             </span>
           </h1>
@@ -75,25 +85,28 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <motion.button
-            className="px-8 py-4 bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6] text-white font-semibold rounded-lg flex items-center gap-2 group transition-all duration-300 hover:shadow-[0_20px_40px_rgba(198,60,142,0.3)]"
-            whileHover={{ y: -3 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Start Project
-            <ArrowRight
-              size={20}
-              className="group-hover:translate-x-1 transition-transform"
-            />
-          </motion.button>
+          <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.95 }}>
+            <Link
+              href="#contact"
+              className="inline-flex px-8 py-4 bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6] text-white font-semibold rounded-lg items-center gap-2 group transition-all duration-300 hover:shadow-[0_20px_40px_rgba(198,60,142,0.3)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C854D6]"
+            >
+              Start project
+              <ArrowRight
+                size={20}
+                className="group-hover:translate-x-1 transition-transform"
+                aria-hidden
+              />
+            </Link>
+          </motion.div>
 
-          <motion.button
-            className="px-8 py-4 border-2 border-[#C63C8E]/50 text-[#D5D9DD] font-semibold rounded-lg hover:border-[#C63C8E] hover:bg-[#C63C8E]/10 transition-all duration-300"
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Explore Services
-          </motion.button>
+          <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
+            <Link
+              href="#services"
+              className="inline-flex px-8 py-4 border-2 border-[#C63C8E]/50 text-[#D5D9DD] font-semibold rounded-lg hover:border-[#C63C8E] hover:bg-[#C63C8E]/10 transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C63C8E]"
+            >
+              Explore services
+            </Link>
+          </motion.div>
         </motion.div>
 
         {/* Stats / Features Row */}
@@ -124,25 +137,46 @@ export default function HeroSection() {
 
       {/* Floating elements */}
       <motion.div
-        className="absolute top-20 right-10 w-20 h-20 rounded-lg border-2 border-[#C63C8E]/20 opacity-50"
-        animate={{ rotate: 360, y: [0, -20, 0] }}
-        transition={{
-          rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-          y: { duration: 4, repeat: Infinity },
-        }}
+        className="pointer-events-none absolute top-20 right-10 hidden md:block w-20 h-20 rounded-lg border-2 border-[#C63C8E]/20 opacity-50"
+        aria-hidden
+        animate={
+          reduceMotion
+            ? { rotate: 0, y: 0 }
+            : { rotate: 360, y: [0, -20, 0] }
+        }
+        transition={
+          reduceMotion
+            ? { duration: 0 }
+            : {
+                rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+                y: { duration: 4, repeat: Infinity },
+              }
+        }
       />
       <motion.div
-        className="absolute bottom-32 left-10 w-16 h-16 rounded-full border-2 border-[#A32EE7]/20 opacity-50"
-        animate={{ rotate: -360, y: [0, 20, 0] }}
-        transition={{
-          rotate: { duration: 15, repeat: Infinity, ease: "linear" },
-          y: { duration: 5, repeat: Infinity },
-        }}
+        className="pointer-events-none absolute bottom-32 left-10 hidden md:block w-16 h-16 rounded-full border-2 border-[#A32EE7]/20 opacity-50"
+        aria-hidden
+        animate={
+          reduceMotion
+            ? { rotate: 0, y: 0 }
+            : { rotate: -360, y: [0, 20, 0] }
+        }
+        transition={
+          reduceMotion
+            ? { duration: 0 }
+            : {
+                rotate: { duration: 15, repeat: Infinity, ease: "linear" },
+                y: { duration: 5, repeat: Infinity },
+              }
+        }
       />
       <motion.div
-        className="absolute top-1/2 left-1/4 w-12 h-12 bg-gradient-to-br from-[#C854D6]/20 to-transparent rounded-lg opacity-30"
-        animate={{ y: [0, -30, 0], x: [0, 10, 0] }}
-        transition={{ duration: 6, repeat: Infinity }}
+        className="pointer-events-none absolute top-1/2 left-1/4 hidden lg:block w-12 h-12 bg-gradient-to-br from-[#C854D6]/20 to-transparent rounded-lg opacity-30"
+        aria-hidden
+        animate={reduceMotion ? { y: 0, x: 0 } : { y: [0, -30, 0], x: [0, 10, 0] }}
+        transition={
+          reduceMotion ? { duration: 0 } : { duration: 6, repeat: Infinity }
+        }
       />
     </section>
   );
