@@ -4,13 +4,46 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const MOBILE_NAV_ID = "primary-mobile-nav";
 
+/** Section order top → bottom (must match DOM ids on the home page). */
+const SCROLL_SECTIONS = [
+  { id: "about", name: "about" },
+  { id: "services", name: "services" },
+  { id: "portfolio", name: "portfolio" },
+  { id: "team", name: "team" },
+  { id: "faq", name: "faq" },
+  { id: "contact", name: "contact" },
+];
+
+const HOME_SCROLL_MAX = 72;
+/** Viewport line below fixed header — section is “active” once its top crosses this. */
+const SECTION_TRIGGER_PX = 96;
+
+function getScrollActiveSection() {
+  if (typeof window === "undefined") return "home";
+  if (window.scrollY < HOME_SCROLL_MAX) return "home";
+
+  let active = "about";
+  for (const { id, name } of SCROLL_SECTIONS) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    const { top } = el.getBoundingClientRect();
+    if (top <= SECTION_TRIGGER_PX) active = name;
+  }
+  return active;
+}
+
 export default function Navbar() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeLink, setActiveLink] = useState("home");
+  const [scrollSection, setScrollSection] = useState("home");
+  const [hoveredSection, setHoveredSection] = useState(null);
+
+  const activeLink = hoveredSection ?? scrollSection;
 
   const links = [
     { name: "home", href: "/", label: "Home" },
@@ -24,10 +57,35 @@ export default function Navbar() {
   ];
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 80);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    if (pathname === "/career") {
+      setScrollSection("career");
+      const onCareerScroll = () => setIsScrolled(window.scrollY > 80);
+      onCareerScroll();
+      window.addEventListener("scroll", onCareerScroll, { passive: true });
+      return () => window.removeEventListener("scroll", onCareerScroll);
+    }
+
+    if (pathname !== "/") {
+      setScrollSection("home");
+      const onScrollOther = () => setIsScrolled(window.scrollY > 80);
+      onScrollOther();
+      window.addEventListener("scroll", onScrollOther, { passive: true });
+      return () => window.removeEventListener("scroll", onScrollOther);
+    }
+
+    const tick = () => {
+      setIsScrolled(window.scrollY > 80);
+      setScrollSection(getScrollActiveSection());
+    };
+
+    tick();
+    window.addEventListener("scroll", tick, { passive: true });
+    window.addEventListener("resize", tick);
+    return () => {
+      window.removeEventListener("scroll", tick);
+      window.removeEventListener("resize", tick);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -46,7 +104,7 @@ export default function Navbar() {
       <motion.div
         key={index}
         className="relative group"
-        onHoverStart={() => setActiveLink(link.name)}
+        onHoverStart={() => setHoveredSection(link.name)}
       >
         <Link
           href={link.href}
@@ -55,7 +113,7 @@ export default function Navbar() {
               ? "text-transparent bg-clip-text bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6]"
               : "text-[#D5D9DD] hover:text-[#f5f5f7]"
           }`}
-          onClick={() => setActiveLink(link.name)}
+          onClick={() => setHoveredSection(null)}
         >
           {link.label}
 
@@ -79,26 +137,46 @@ export default function Navbar() {
   };
 
   // Mobile Link Component
-  const MobileLink = ({ link, index }) => (
-    <motion.div
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: index * 0.05 }}
-      className="w-full"
-    >
-      <Link
-        href={link.href}
-        onClick={() => {
-          setOpen(false);
-          setActiveLink(link.name);
-        }}
-        className="relative capitalize font-semibold text-base tracking-wide text-[#D5D9DD] hover:text-[#f5f5f7] transition-colors duration-300 py-3 px-4 block rounded-lg hover:bg-gradient-to-r hover:from-[#C63C8E]/10 hover:to-[#A32EE7]/10 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C854D6]"
+  const MobileLink = ({ link, index }) => {
+    const isMobileActive = activeLink === link.name;
+    return (
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: index * 0.05 }}
+        className="w-full"
       >
-        <motion.span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-gradient-to-b from-[#C63C8E] to-[#A32EE7] rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        {link.label}
-      </Link>
-    </motion.div>
-  );
+        <Link
+          href={link.href}
+          onClick={() => {
+            setOpen(false);
+            setHoveredSection(null);
+          }}
+          className={`relative block rounded-lg py-3 pl-5 pr-4 text-base font-semibold tracking-wide transition-colors duration-300 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C854D6] ${
+            isMobileActive
+              ? "bg-gradient-to-r from-[#C63C8E]/12 to-[#A32EE7]/8"
+              : "text-[#D5D9DD] hover:bg-gradient-to-r hover:from-[#C63C8E]/10 hover:to-[#A32EE7]/10 hover:text-[#f5f5f7]"
+          }`}
+        >
+          <span
+            className={`absolute left-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-r-full bg-gradient-to-b from-[#C63C8E] to-[#A32EE7] transition-opacity duration-300 ${
+              isMobileActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+            }`}
+            aria-hidden
+          />
+          <span
+            className={
+              isMobileActive
+                ? "bg-gradient-to-r from-[#C63C8E] via-[#A32EE7] to-[#C854D6] bg-clip-text text-transparent"
+                : ""
+            }
+          >
+            {link.label}
+          </span>
+        </Link>
+      </motion.div>
+    );
+  };
 
   return (
     <header
@@ -143,7 +221,10 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-2 h-full items-center">
+        <nav
+          className="hidden md:flex gap-2 h-full items-center"
+          onMouseLeave={() => setHoveredSection(null)}
+        >
           {links.map((link, i) => (
             <DesktopLink key={i} link={link} index={i} />
           ))}

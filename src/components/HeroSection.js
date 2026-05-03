@@ -9,7 +9,7 @@ export default function HeroSection() {
   return (
     <section
       id="about"
-      className="relative min-h-screen pt-32 pb-20 px-6 overflow-hidden scroll-mt-[88px]"
+      className="relative min-h-dvh overflow-hidden px-6 pb-16 pt-32 scroll-mt-[88px] md:min-h-0 md:pb-20 md:pt-36"
       aria-labelledby="hero-heading"
     >
       {/* Animated gradient background */}
